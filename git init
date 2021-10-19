@@ -1,0 +1,6 @@
+git init
+git add .
+git commit -a -m ""
+git remote add origin https://gitlab.com/username/new_repo
+git push origin master
+git remote set-url origin git@gitlab.com:username/repo.git
