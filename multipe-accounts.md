@@ -1,6 +1,6 @@
 ## Problem   
 Two github accounts, *mahimanWork*(my-work) and *mahiman12*(my personal). I want to use both accounts on the same computer (with use of ssh-keys and not using email and password).
-Adding your existing ssh key (for ex. id_rsa.pub, id_ed25519.pub, etc.) in github settings for both of your accounts won't help and will thrown an error.
+Adding your existing ssh key (for ex. id_rsa.pub, id_ed25519.pub, etc.) in github settings for both of your accounts won't help and will throw an error.
 
 ## Solution
 We have to use **host name/alias** in the config file (for every account) in ```~/.ssh``` folder to solve the problem
@@ -9,22 +9,22 @@ We have to use **host name/alias** in the config file (for every account) in ```
 
 1. Check for existing keys : ```ls -al ~/.ssh```
 
-2. Check if you have existing ```.pub``` keys :
+2. Check if you have existing ```.pub``` keys after step 1:
 ``` 
     id_rsa.pub
     id_ecdsa.pub
     id_ed25519.pub
 ```
-3. If you have an existing key then you have to make another single key, or you'll have to create two separate keys :
+1. If you have an existing key then you have to make another key, otherwise you'll have to create two separate keys :
 
    1. ```ssh-keygen -t rsa -b 4096 -C "work-email@example.com"```
-   2. In order to make two different keys, provide different file name, when prompted *Enter a file in which to save the key*
+   2. In order to make two different keys, provide different file name, when prompted ***Enter a file in which to save the key***
    
         ```Enter a file in which to save the key (/Users/you/.ssh/id_rsa): /Users/betterhalf/.ssh/id_work```
-    3. Add the paraphrases if you want to else press *Enter*
-    4. Now, for personal github account, repeat the same process with different email id for the 1st step and for the second step you may use ```/Users/betterhalf/.ssh/id_mahiman``` as the file to save the key
+    3. Press enter and You will be propmpted to Add paraphrases. Add if you want to else press **Enter**
+    4. Now, for personal github account, repeat the same process with different email id in the 1st step and in the second step you may use ```/Users/betterhalf/.ssh/id_mahiman``` different file name to save the key
 
-4. Now, check if you have config file present : 
+2. Now, check if you have config file present : 
    
    ```open ~/.ssh/config```
    
@@ -32,7 +32,7 @@ We have to use **host name/alias** in the config file (for every account) in ```
 
    ```touch ~/.ssh/config```
 
-5. Add host name/alias for your multiple accounts :
+3. Add host name/alias for your multiple accounts in the newly created config file : ```vim ~/.ssh/config```
 
     ```
         # Default github account: mahimanWork
@@ -48,24 +48,24 @@ We have to use **host name/alias** in the config file (for every account) in ```
             IdentitiesOnly yes
     ```
 
-6. Add ssh private keys to your agent:
+4. Add ssh private keys to your agent:
 
     ```
     ssh-add ~/.ssh/id_rsa
     ssh-add ~/.ssh/id_mahiman
     ```
 
-7. Test your connection
+5. Test your connection
 
     ```
         ssh -T git@github.com
         ssh -T git@github-mahiman.com
     ```
 
-8. If everything is OK, you will get a message for successfull authentication
+6. If everything is OK, you will get a message for successfull authentication, otherwise you will be prompted if you want to continue connecting. Just type ```yes``` and press **Enter**
 
-9. Now, clone your repository using your host name/alias : ```git@Hostname-from-config:repositoryURL```
+7. Now, clone your repository using your host name/alias : ```git@Hostname-from-config:repositoryURL```
     
     ```git@github-mahiman.com:mahiman12/git-cmds.git /path/to/directory```
 
-Done! Good to Go! Thanks you!
+Done! Good to Go! Thank you!
