@@ -68,4 +68,4 @@ We have to use **host name/alias** in the config file (for every account) in ```
     
     ```git@github-mahiman.com:mahiman12/git-cmds.git /path/to/directory```
 
-Done! Good to Go! Thanks you!
+Done! Good to Go! Thank you!
